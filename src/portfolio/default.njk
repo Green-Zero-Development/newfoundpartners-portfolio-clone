@@ -1,0 +1,10 @@
+---
+layout: layouts/portfolio-single.njk
+pagination:
+    data: portfolio
+    size: 1
+    alias: portfolioSing
+eleventyComputed:
+  yoastHead: "{{ portfolioSing.yoast|safe }}"
+permalink: portfolio-item/{{ portfolioSing.slug }}/index.html
+---

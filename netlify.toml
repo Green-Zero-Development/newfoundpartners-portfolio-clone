@@ -1,0 +1,16 @@
+[build]
+  publish = "_site"
+  command = "npm run build"
+
+[[redirects]]
+  from = "https://brendon-resume-2021.netlify.app/*"
+  to = "https://www.brendonfolsom.com/:splat"
+  status = 301
+  force = true
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"

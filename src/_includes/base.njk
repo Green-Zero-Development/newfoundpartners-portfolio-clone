@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    {% include "./head/all.njk" %}
+    {% if build.env == "production" %}
+        {# Add any CSS from the main script #}
+        {% viteLinkStylesheetTags "src/client/main.js" %}
+        {% viteLinkModulePreloadTags "src/client/main.js" %}
+    {% else %}
+    <script src="https://cdn.tailwindcss.com"></script>
+    {% endif %}
+    </head>
+    <body>
+        {% include "header.njk" %}
+        <main>
+            {{ content | safe }}
+        </main>
+        {% include "footer.njk" %}
+        {#  
+            We must split development  and production scripts
+            In development, vite runs a server to resolve and reload scripts
+            In production, the scripts are statically replaced at build-time 
+
+            The build.env variable is assigned in src/_data/build.js
+            @see https://vitejs.dev/guide/backend-integration.html#backend-integration
+            @see https://www.11ty.dev/docs/data-js/#example-exposing-environment-variables
+        #}
+        {% if build.env == "production" %}
+            {# We must read the production scripts from the Vite manifest. We defer that logic to a custom shortcode #}
+            {% viteScriptTag "src/client/main.js" %}
+            {% viteLegacyScriptTag "vite/legacy-polyfills" %}
+            {% viteLegacyScriptTag "src/client/main-legacy.js" %}
+        {% else %}
+            <script type="module" src="http://localhost:3000/@vite/client"></script>
+            <script type="module" src="http://localhost:3000/src/client/main.js"></script>
+        {% endif %}
+    </body>
+</html>

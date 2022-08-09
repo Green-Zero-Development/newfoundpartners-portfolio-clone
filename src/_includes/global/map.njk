@@ -1,0 +1,72 @@
+{% set mappedPortfolio = [] %}
+{% for item in portfolio %}
+    {% if item.map %}
+        {% set mappedPortfolio = (mappedPortfolio.push({projectStatus: item.projectStatus, lat: item.map.lat, lng: item.map.lng, url: item.slug }), mappedPortfolio) %}
+    {% endif %}
+{% endfor %}
+
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
+
+<div id="map" class="w-full md:w-5/6 lg:w-3/4 my-6 md:my-12 mx-auto map"></div>
+
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoiZ3JlZW4temVybyIsImEiOiJja3o2MzZ1MXowNXNzMnBtcDltYzhpbmppIn0.j1tFVVIMUI9X7piqf8jv_Q';
+const geojson = {
+    'type': 'FeatureCollection',
+    'features': [
+    {% for item in mappedPortfolio %}
+    {
+        'type': 'Feature',
+        'properties': {
+            'url': '/portfolio-item/{{ item.url }}',
+            {% if item.projectStatus == "Active Investment" %}
+            'marker': 'https://ik.imagekit.io/greenzero/NewFound/active-project-pin-1_u3ZJD-Myui6.png?ik-sdk-version=javascript-1.4.3&updatedAt=1643051219193',
+            {% endif %}
+            {% if item.projectStatus == "Exited Project" %}
+            'marker': 'https://ik.imagekit.io/greenzero/NewFound/exited-project-pin-1_TseqCU-mrUe.png?ik-sdk-version=javascript-1.4.3&updatedAt=1643051364018',
+            {% endif %}
+            'iconSize': [40, 40]
+        },
+            'geometry': {
+                'type': 'Point',
+                'coordinates': [{{ item.lng }}, {{ item.lat }}]
+        }
+    }{% if loop.last !== true %},{% endif %}
+    {% endfor %}
+]
+};
+ 
+const map = new mapboxgl.Map({
+    container: 'map', // container ID
+    style: 'mapbox://styles/mapbox/streets-v11', // style URL
+    center: [-92.4842, 34.0119], // starting position [lng, lat]
+    zoom: 4 // starting zoom,
+});
+
+map.scrollZoom.disable();
+map.addControl(new mapboxgl.NavigationControl());
+ 
+// Add markers to the map.
+for (const marker of geojson.features) {
+    // Create a DOM element for each marker.
+    const el = document.createElement('div');
+    const width = marker.properties.iconSize[0];
+    const height = marker.properties.iconSize[1];
+    el.className = 'marker';
+    el.style.cursor = 'pointer';
+    el.style.backgroundImage = `url(` + marker.properties.marker + `)`;
+    el.style.width = `${width}px`;
+    el.style.height = `${height}px`;
+    el.style.backgroundSize = '100%';
+ 
+el.addEventListener('click', () => {
+    window.location.href = marker.properties.url;
+});
+ 
+// Add markers to the map.
+new mapboxgl.Marker(el)
+    .setLngLat(marker.geometry.coordinates)
+    .addTo(map);
+}
+</script>

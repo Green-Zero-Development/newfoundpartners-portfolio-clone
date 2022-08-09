@@ -1,0 +1,25 @@
+---
+permalink: /sitemap.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+  <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+      <loc>{{ siteData.siteBaseUrl }}/</loc>
+      <lastmod>{{ homePage.modified }}-05:00</lastmod>
+    </url>
+    {% for item in wpages %}
+      {% if item.title !== "Thank You" %}
+      <url>
+        <loc>{{ siteData.siteBaseUrl }}/{{ item.slug }}/</loc>
+        <lastmod>{{ item.modified }}-05:00</lastmod>
+      </url>
+      {% endif %}
+    {% endfor %}
+    {% for item in portfolio %}
+      <url>
+        <loc>{{ siteData.siteBaseUrl }}/{{ item.slug }}/</loc>
+        <lastmod>{{ item.modified }}-05:00</lastmod>
+      </url>
+    {% endfor %}
+</urlset>

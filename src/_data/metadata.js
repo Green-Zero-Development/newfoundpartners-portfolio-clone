@@ -1,0 +1,1 @@
+module.exports = { baseUrl: "https://nfpartners.greenzero.dev", apiUrl: "https://nfpartners.greenzero.dev/wp-json/wp/v2", cacheInterval: '1m' };

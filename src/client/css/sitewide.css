@@ -1,0 +1,213 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+    font-family: sofia-pro, sans-serif;
+}
+
+body {
+  
+}
+
+h1 {
+  
+}
+
+h2 {
+
+}
+
+h3 {
+
+}
+
+h4 {
+
+}
+
+h5 {
+  
+}
+
+h6 {
+
+}
+
+p {
+  
+}
+
+a {
+  
+}
+
+button {
+    background-color: #004790;
+    color: white;
+    font-weight: 700;
+    padding: 8px 15px 8px 15px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    transition: 0.25s;
+}
+
+button:hover {
+    background-color: #003973;
+    transition: 0.25s;
+}
+
+.light-button {
+    background-color: #19b5fe;
+    color: white;
+    font-weight: 700;
+    padding: 8px 15px 8px 15px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    transition: 0.25s;
+}
+
+.light-button:hover {
+    background-color: #1491cb;
+    transition: 0.25s;
+}
+
+ul {
+
+}
+
+ol {
+
+}
+
+li {
+  
+}
+
+address {
+
+}
+
+blockquote {
+
+}
+
+code {
+
+}
+
+label {
+
+}
+
+input {
+
+}
+
+input::placeholder {
+  
+}
+
+textarea {
+
+}
+
+textarea::placeholder {
+  
+}
+
+select {
+
+}
+
+input[type="submit"] {
+  
+}
+
+img {
+  
+}
+
+[x-cloak] { 
+    display: none !important; 
+}
+
+footer li {
+    font-weight: 900;
+    opacity: .75;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.hero-box {
+    background-color: #ffffff;
+    background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%2319b5fe' fill-opacity='0.3' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
+    color: #222222;
+}
+
+.project-filters {
+    font-family: sofia-pro, sans-serif;
+    opacity: 0.65;
+    font-size: 14px;
+}
+
+.no-match-filter {
+    
+}
+
+.filter-highlighted {
+    color: #004790 !important;
+    text-decoration: underline;
+}
+
+.portfolio-item-border {
+    min-height: 500px;
+    border: 8px solid;
+}
+
+.active-investments-border {
+    border-color: #004790 !important;
+}
+
+.exited-projects-border {
+    border-color: #ffbf47 !important;
+}
+
+.map {
+    height: 400px;
+    /* background-image: url('https://api.mapbox.com/styles/v1/mapbox/light-v10/static/{% for item in mappedPortfolio %}{% if item.projectStatus == "Active Investment" %}url-https%3a%2f%2fik.imagekit.io%2fgreenzero%2fNewFound%2factive-project-pin-1_u3ZJD-Myui6.png%3fik-sdk-version%3djavascript-1.4.3%26updatedAt%3d1643051219193{% else %}url-https%3a%2f%2fik.imagekit.io%2fgreenzero%2fNewFound%2fexited-project-pin-1_TseqCU-mrUe.png%3fik-sdk-version%3djavascript-1.4.3%26updatedAt%3d1643051364018{% endif %}({{ item.lng }},{{ item.lat }}){% if loop.last !== true %},{% endif %}{% endfor %}/-92.4842,34.0119,4/1280x600?access_token=pk.eyJ1IjoiZ3JlZW4temVybyIsImEiOiJja3lzejY2M3QxOHIwMndwMmJscTV2eXlxIn0.kZAx5WdfHQPL_7XYdnp7QA'); */
+}
+
+@media (min-width: 416px) {
+   
+}
+
+@media (min-width: 576px) {
+    /* .map {
+       height: 300px;
+    } */
+}
+
+@media (min-width: 768px) {
+    
+}
+
+@media (min-width: 992px) {
+    .map {
+        height: 500px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .map {
+        height: 600px;
+    }
+}
+
+@media (min-width: 1440px) {
+    
+}
+
+@media (min-width: 2000px) {
+    
+}

@@ -1,0 +1,200 @@
+<style>
+.hero-box strong {
+    color: black;
+    background-color: #ffbf47;
+    background-image: linear-gradient(315deg, #ffbf47 0%, #19b5fe 74%);
+}
+.home-hero-content {
+    
+}
+.home-hero-image {
+    background-image: url('https://nfpartners.greenzero.dev/wp-content/uploads/2021/12/Burlington.jpg');
+}
+.hero-video {
+    
+}
+.portfolio-item:hover .portfolio-listing-gradient {
+    opacity: 0.6;
+    transition: 0.25s;
+}
+.portfolio-filters {
+    
+}
+.filter-button {
+    margin: 15px 0 0 15px;
+}
+.filter-dropdown {
+    background-color: #ffbf47;
+    border-radius: 6px;
+    border: 4px solid #19b5fe;
+    color: #000000;
+}
+.home-hero-image {
+    background-image: url('https://nfpartners.greenzero.dev/wp-content/uploads/2022/02/new-found-smoky.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.hero-video {
+    height: 100%;
+    width: 100vh;
+    min-width: 100%;
+    min-height: 56vw;
+}
+.home-video-gradient {
+    background-color: #ffffff;
+    background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%2319b5fe' fill-opacity='0.3' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
+    color: #222222;
+    opacity: 0.7;
+}
+</style>
+
+<div class="relative w-full text-black pt-20 pb-24 overflow-hidden home-hero-image">
+    <div class="absolute top-0 w-full h-full z-10 home-video-gradient"></div>
+    <div class="relative w-full max-w-4xl text-center mx-auto px-6 sm:px-12 md:px-20 z-30">
+        {# <h1 class="font-new text-5xl md:text-7xl mx-auto pb-6 leading-none uppercase">{{ homePage.heroSection.title | safe }}</h1> #}
+        <img class="w-48 lg:w-64 mx-auto pb-6" src="https://nfpartners.greenzero.dev/wp-content/uploads/2020/11/logo.png" />
+        <p class="text-xl mb-10">{{ homePage.heroSection.paragraph }}</p>
+        <a 
+        {% if homePage.heroSection.button.link_to_where == "A page on this site" %}
+        href='{{ homePage.heroSection.button.page_link }}'
+        {% elseif homePage.heroSection.button.link_to_where == "Another site" %}
+        href='{{ homePage.heroSection.button.offsite_link }}' target='_blank'
+        {% elseif homePage.heroSection.button.link_to_where == "A file" %}
+                href='{{ homePage.heroSection.button.file_link }}' 
+        target='_blank'
+        {% endif %}
+        >
+            <button class='bg-darkbrown text-sm font-bold uppercase text-white py-2 px-8 rounded-lg brown-button'>{{ homePage.heroSection.button.text }}</button>
+        </a>
+    </div>
+    <img src="https://nfpartners.greenzero.dev/wp-content/uploads/2022/02/new-found-smoky.jpg" class="lg:hidden absolute top-0 w-full h-full" />
+    <!-- <video id="hero-video" class="hidden lg:block absolute top-0 w-full h-full hero-video xxl:-mt-24 z-min1" autoplay>
+        <source src="https://nfpartners.greenzero.dev/wp-content/uploads/2022/01/home-video-1.mp4" type="video/mp4">
+    </video> -->
+</div>
+
+{% include "global/map.njk" %}
+
+{# <div class="w-full pt-12">
+    <h2 class="font-new text-4xl text-center uppercase">New Projects</h2>
+    <!-- <div class="flex flex-wrap w-full max-w-5xl text-left mx-auto pt-6">
+        {% for item in taxonomies.portfolioTypes %}
+            <div class="flex py-3 px-8">
+                <input id="{{ item.id }}" class="hidden cursor-pointer type-checkbox" type="checkbox" /><label id="label-{{ item.id }}" for="{{ item.id }}" class="cursor-pointer select-none" >{{ item.name }}</label>
+            </div>
+        {% endfor %}
+    </div> -->
+</div> #}
+
+{# <div class="relative flex flex-wrap w-full bg-white mt-8" x-data="{ filtersOpen: false }">
+    <div id="no-match-filter" class="hidden w-full py-48 no-match-filter">
+        <h6 class="text-2xl md:text-5xl text-white font-bold uppercase text-center leading-tight px-8">No results - try a different combination!</h6>
+    </div>
+    <!-- <div class="absolute top-0 w-full -mt-16 portfolio-filters">
+        <button id="filter-button" class="relative z-30 filter-button" x-on:click="filtersOpen = ! filtersOpen">
+            <i class="mr-2 fas fa-filter"></i>Filters
+        </button>
+        <div class="absolute bg-white py-6 mt-2 mx-4 z-30 filter-dropdown" x-show="filtersOpen" @click.outside="filtersOpen = false" x-transition x-cloak>
+            <div class="">
+                <div class="flex flex-wrap px-4">
+                    {% for item in taxonomies.portfolioTypes %}
+                        <div class="flex items-center px-3">
+                            <input id="{{ item.id }}" class="mr-1 cursor-pointer type-checkbox" type="checkbox" /><label for="{{ item.id }}" class="cursor-pointer select-none" >{{ item.name }}</label>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    {% for item in portfolio %}
+        {% if item.showOnHomepage == "Yes" %}
+            <style>
+                .portfolio-item-{{ item.featId }} {
+                    background-image: url('{{ item.featImg }}');
+                }
+            </style>
+            <a href="/portfolio-item/{{ item.slug }}" class="relative w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 bg-cover mx-auto p-2 portfolio-item inner-search-type-box-container">
+                <div class="p-3 {% if item.projectStatus == "Active Investment" %}active-investments-border {% elseif item.projectStatus == "Exited Project" %}exited-projects-border {% endif %}portfolio-item-border">
+                    <div class="w-full h-72 bg-cover bg-center mb-4 portfolio-item-{{ item.featId }}"></div>
+                    <h3 class="relative font-new text-2xl xxl:text-3xl uppercase leading-tight z-20">{{ item.title }}</h3>
+                    <div class="pb-4 project-filters inner-search-type-box-for-filters">
+                        {% for item1 in item.types %}
+                            {% if loop.last !== true %}{{ item1.name }},{% else %}{{ item1.name }}{% endif %}
+                        {% endfor %}
+                    </div>
+                    <h6 class="relative text-sm italic leading-tight pb-2 z-20">{{ item.addressInfo.city }}</h6>
+                </div>
+                <img class="absolute bottom-0 right-0 w-24 m-6" src="https://nfpartners.greenzero.dev/wp-content/uploads/2020/11/logo.png" />
+            </a>
+        {% endif %}
+    {% endfor %}
+</div>
+
+<a href="/portfolio/" class="flex w-full mx-auto">
+    <button class='bg-darkbrown text-sm font-bold uppercase text-white mt-12 mb-32 mx-auto py-2 px-8 rounded-lg brown-button'>View Portfolio</button>
+</a> #}
+
+<script>
+var filterValues = [];
+const typeBoxes = document.querySelectorAll('.inner-search-type-box-container');
+const noMatchFilterMessage = document.getElementById('no-match-filter');
+
+{% for item in taxonomies.portfolioTypes %}
+    var typeCheckbox{{ item.id }} = document.getElementById('{{ item.id }}');
+    var typeLabel{{ item.id }} = document.getElementById('label-{{ item.id }}');
+    typeCheckbox{{ item.id }}.addEventListener("click", function(e) {
+        // initialize the no match filter, this will be toggled off later if there are any typeBoxes displayed
+        var noMatchFilterCheck = true;
+
+        // check if the checkbox is checked. If it is, remove the type from the filterValues array. If it isn't, add type to the filterValues array.
+        if (typeCheckbox{{ item.id }}.checked !== false) {
+            filterValues.push("{{ item.name }}");
+            typeLabel{{ item.id }}.classList.add('filter-highlighted');
+        } else {
+            filterValues.splice(filterValues.indexOf('{{ item.name }}'), 1);
+            typeLabel{{ item.id }}.classList.remove('filter-highlighted');
+        }
+
+        // check if the filterValues array is empty. If it is, turn on all the boxes. If it isn't, turn off all the boxes to prepare for filtering
+        if (filterValues.length === 0) {
+            for (let i2 = 0; i2 < typeBoxes.length; i2++) {
+                typeBoxes[i2].style.cssText = "display: block"
+            }
+        } else {
+            for (let i2 = 0; i2 < typeBoxes.length; i2++) {
+                typeBoxes[i2].style.cssText = "display: none"
+            }
+        }
+        
+        // loop the filterValues array. For each value in the filterValues array, loop the typeBoxes and compare the innerText of its boxFilterValues to the filterValues value. If any of the boxFilterValues innerText matches a value in the filterValues array, turn that typeBox on.
+        for (let i = 0; i < filterValues.length; i++) {
+            for (let i2 = 0; i2 < typeBoxes.length; i2++) {
+                var boxFilterValues = typeBoxes[i2].querySelector('.inner-search-type-box-for-filters').innerText;
+                if (boxFilterValues.includes(filterValues[i])) {
+                    typeBoxes[i2].style.cssText = "display: block"
+                }
+                // loop the typeBoxes to check if any are displayed. If some are, remove the no match filter message
+                for (let i3 = 0; i3 < typeBoxes.length; i3++) {
+                    if (typeBoxes[i3].style.display == "block") {
+                        noMatchFilterCheck = false;
+                    }
+                }
+            }
+        }
+
+        // if the loop above detects that all boxes are hidden, display the no match message
+        if (noMatchFilterCheck == true) {
+            noMatchFilterMessage.classList.remove('hidden');
+        } else {
+            noMatchFilterMessage.classList.add('hidden');
+        }
+
+        // turn off the no match filter if all filter checkboxes are empty
+        if (filterValues.length === 0 && noMatchFilterCheck == true) {
+            noMatchFilterMessage.classList.add('hidden');
+        }
+
+    });
+{% endfor %}
+</script>
